@@ -1,0 +1,12 @@
+{% extends "blogs/base.html" %}
+
+
+{% block content %}
+    <p>Add New Blog Post</p>
+
+    <form action="{% url 'blogs:new_blog' %}" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button name='submit'>Submit</button>
+    </form>
+{% endblock content %}

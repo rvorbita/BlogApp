@@ -1,0 +1,24 @@
+{% extends "blogs/base.html" %}
+{% block content %}
+<h1>
+    Welcome to Ramble Blog
+</h1>
+    
+
+    <ul>
+        {% for blogpost in blogposts %}
+            <li>
+                <h2>{{ blogpost.title }}</h2>
+                <p>{{ blogpost.date_added }}</p>
+                <p>{{ blogpost.text|linebreaks }}</p>
+                <a href="{% url 'blogs:edit_blog' blogpost.id %}">Edit Blog</a>
+                <a href="{% url 'blogs:delete_blog' blogpost.id %}">Delete Blog</a>
+            </li>
+            
+        {% empty %}
+            <p>No Blog entries found.</p>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'blogs:new_blog' %}">New Blog Post</a>
+    
+{% endblock content%}
