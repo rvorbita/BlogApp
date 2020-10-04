@@ -3,11 +3,11 @@
 
 {% block content %}
 
-    <p>Are you sure you want to delete this blog post?</p>
-    <a href="{% url 'blogs:index' %}"></a>
+    <p>Are you sure you want to delete this blog post?<a href="{% url 'blogs:index' %}" class="btn btn-warning"> Cancel</a></p>
+
 
     <form action="{% url 'blogs:delete_blog' blogpost.id %}" method="POST">
         {% csrf_token %}
-        <button name='submit'>Submit</button>
+        <button name='submit' class="btn btn-danger">Delete</button>
     </form>
 {% endblock content %}

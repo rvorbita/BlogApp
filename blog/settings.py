@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     #my app
     'blogs',
     'users',
+    'bootstrap4',
     #other services.
     'django.contrib.admin',
     'django.contrib.auth',
@@ -122,3 +123,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+#mysettings
+LOGIN_URL = 'users:login'
+
+#heroku settings.
+import django_heroku
+django_heroku.settings(locals())

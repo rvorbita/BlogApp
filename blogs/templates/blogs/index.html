@@ -1,24 +1,46 @@
 {% extends "blogs/base.html" %}
-{% block content %}
-<h1>
-    Welcome to Ramble Blog
-</h1>
-    
 
-    <ul>
+{% block page_header %}
+    <h2>
+        Welcome to BLOG-MO
+    </h2>
+{% endblock page_header %}
+
+{% block content %}
+    <!-- <ul>
         {% for blogpost in blogposts %}
             <li>
                 <h2>{{ blogpost.title }}</h2>
                 <p>{{ blogpost.date_added }}</p>
                 <p>{{ blogpost.text|linebreaks }}</p>
-                <a href="{% url 'blogs:edit_blog' blogpost.id %}">Edit Blog</a>
-                <a href="{% url 'blogs:delete_blog' blogpost.id %}">Delete Blog</a>
+                {% if blogpost.owner == request.user and request.user.is_authenticated %}
+                        <a href="{% url 'blogs:edit_blog' blogpost.id %}">Edit Blog</a>
+                        <a href="{% url 'blogs:delete_blog' blogpost.id %}">Delete Blog</a>
+                {% endif %}
             </li>
             
         {% empty %}
             <p>No Blog entries found.</p>
         {% endfor %}
-    </ul>
-    <a href="{% url 'blogs:new_blog' %}">New Blog Post</a>
+    </ul> -->
+
+        {% for blogpost in blogposts %}
+            <h2 class="card-header">{{ blogpost.title }}</h2>
+            <div class="card-body">
+                <p class="card-title">{{ blogpost.date_added }}</p>
+                <p class="card-text">{{ blogpost.text }}</p>
+                {% if blogpost.owner == request.user and request.user.is_authenticated %}
+                    <a href="{% url 'blogs:edit_blog' blogpost.id %}" class="btn btn-primary btn-sm">Edit Blog</a>
+                    <a href="{% url 'blogs:delete_blog' blogpost.id %}" class="btn btn-danger btn-sm">Delete Blog</a>
+                {% endif %}
+            </div>
+
+        {% empty %}
+            <p>No Blog entries found.</p>
+        {% endfor %}
+   
+        {% if user.is_authenticated %}
+            <a href="{% url 'blogs:new_blog' %}" class="btn btn-success">New Blog Post</a>
+        {% endif %}
     
 {% endblock content%}
