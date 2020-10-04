@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 
 from . models import BlogPost
 from . forms import BlogForm
@@ -36,7 +36,8 @@ def new_blog(request):
 def edit_blog(request, blog_id):
     """edit existing blog"""
 
-    blogpost = BlogPost.objects.get(id=blog_id)
+    # blogpost = BlogPost.objects.get(id=blog_id)
+    blogpost = get_object_or_404(BlogPost, id=blog_id)
     #check for post owner raise 404 if not the owner.
     check_blog_owner(blogpost.owner, request.user)
 
